@@ -1,0 +1,62 @@
+\begin{thebibliography}{}
+
+\bibitem[{Center for Strategic and International Studies}, 2025]{CSIS2025}
+{Center for Strategic and International Studies} (2025).
+\newblock Ai biases in critical foreign policy decisions.
+\newblock
+  \url{https://www.csis.org/analysis/ai-biases-critical-foreign-policy-decisions}.
+
+\bibitem[Crawford and Sobel, 1982]{Crawford1982}
+Crawford, V.~P. and Sobel, J. (1982).
+\newblock Strategic information transmission.
+\newblock {\em Econometrica}, 50(6):1431--1451.
+
+\bibitem[Fearon, 1994]{Fearon1994}
+Fearon, J.~D. (1994).
+\newblock Domestic political audiences and the escalation of international
+  disputes.
+\newblock {\em American Political Science Review}, 88(3):577--592.
+
+\bibitem[Kertzer and Brutger, 2016]{Kertzer2016}
+Kertzer, J.~D. and Brutger, R. (2016).
+\newblock Decomposing audience costs: Bringing the audience back into audience
+  cost theory.
+\newblock {\em American Journal of Political Science}, 60(1):234--249.
+
+\bibitem[Li et~al., 2024]{PoliticalLLM2024}
+Li, L., Li, J., Chen, C., et~al. (2024).
+\newblock Political-llm: Large language models in political science.
+\newblock {\em arXiv preprint arXiv:2412.06864}.
+
+\bibitem[Payne et~al., 2026]{Payne2026}
+Payne, K. et~al. (2026).
+\newblock Ai arms and influence: Frontier models exhibit sophisticated
+  reasoning in simulated nuclear crises.
+\newblock {\em arXiv preprint arXiv:2602.14740}.
+
+\bibitem[Rivera et~al., 2024]{Rivera2024}
+Rivera, J.-P., Mukobi, G., Reuel, A., Lamparth, M., Smith, C., and Schneider,
+  J. (2024).
+\newblock Escalation risks from language models in military and diplomatic
+  decision-making.
+\newblock In {\em Proceedings of the 2024 ACM Conference on Fairness,
+  Accountability, and Transparency}, pages 1--13. ACM.
+
+\bibitem[Schelling, 1960]{Schelling1960}
+Schelling, T.~C. (1960).
+\newblock {\em The Strategy of Conflict}.
+\newblock Harvard University Press, Cambridge, MA.
+
+\bibitem[Spence, 1973]{Spence1973}
+Spence, A.~M. (1973).
+\newblock {\em Market Signaling: Informational Transfer in Hiring and Related
+  Screening Processes}.
+\newblock Harvard University Press, Cambridge, MA.
+
+\bibitem[Sun et~al., 2025]{Sun2025}
+Sun, H., Wu, Y., Cheng, Y., and Chu, X. (2025).
+\newblock Game theory meets large language models: A systematic survey.
+\newblock {\em Proceedings of the International Joint Conference on Artificial
+  Intelligence}.
+
+\end{thebibliography}

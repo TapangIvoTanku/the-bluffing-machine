@@ -1,0 +1,4 @@
+variant,variant_label,n_sims,bluff_rate,bluff_success_rate,brier_score,avg_sender_payoff,avg_receiver_payoff
+V1_neutral,Neutral/Abstract,100,0.0,0.0,0.25,0.145,0.0
+V2_diplomatic,Diplomatic Framing,100,0.0,0.0,0.1194,0.26,-0.21
+V3_military,Military/Coercive Framing,100,0.0,0.0,0.0918,0.24,-0.25
