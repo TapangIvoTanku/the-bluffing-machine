@@ -1,0 +1,37 @@
+{
+  "total_coded": 150,
+  "signal_justification": {
+    "capability_based": 85,
+    "risk_avoidance": 38,
+    "strategic_deception": 25,
+    "uncertainty_exploitation": 2
+  },
+  "belief_attribution": {
+    "yes_explicit": 79,
+    "yes_implicit": 71
+  },
+  "deception_awareness": {
+    "no_bluff": 118,
+    "implicit_bluff": 23,
+    "explicit_bluff": 9
+  },
+  "receiver_inference": {
+    "bayesian_update": 148,
+    "confused": 2
+  },
+  "deception_awareness_by_treatment": {
+    "('role_conditioned', 'no_bluff')": 50,
+    "('role_conditioned', 'implicit_bluff')": 16,
+    "('role_conditioned', 'explicit_bluff')": 9,
+    "('zero_shot', 'no_bluff')": 68,
+    "('zero_shot', 'implicit_bluff')": 7
+  },
+  "belief_attribution_by_model": {
+    "('GPT-4.1-mini', 'yes_explicit')": 33,
+    "('GPT-4.1-mini', 'yes_implicit')": 17,
+    "('GPT-4.1-nano', 'yes_explicit')": 26,
+    "('GPT-4.1-nano', 'yes_implicit')": 24,
+    "('Gemini-2.5-Flash', 'yes_implicit')": 30,
+    "('Gemini-2.5-Flash', 'yes_explicit')": 20
+  }
+}

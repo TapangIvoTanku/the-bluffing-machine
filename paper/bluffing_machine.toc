@@ -2,41 +2,42 @@
 \contentsline {section}{\numberline {2}Literature Review}{6}{section.2}%
 \contentsline {subsection}{\numberline {2.1}AI in International Security}{6}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Formal Deterrence and Signaling Theory}{7}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}LLMs as Strategic Agents}{8}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Our Contribution}{8}{subsection.2.4}%
-\contentsline {section}{\numberline {3}The Formal Model: A Signaling Game of Strategic Deception}{9}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Players, Types, and Prior Beliefs}{9}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Sequence of Play}{9}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Payoffs}{9}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Equilibrium Analysis}{10}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Hypotheses}{11}{subsection.3.5}%
-\contentsline {section}{\numberline {4}Experimental Methodology}{12}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Experimental Design}{12}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Simulation Procedure}{12}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Evaluation Metrics}{12}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Prompt Sensitivity Analysis}{13}{subsection.4.4}%
-\contentsline {section}{\numberline {5}Results}{14}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Headline Results: Bluffing Rates}{14}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Bayesian Belief Calibration}{16}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Payoff Distributions}{17}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}Prompt Sensitivity Analysis}{18}{subsection.5.4}%
-\contentsline {section}{\numberline {6}Discussion}{20}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Theoretical Implications}{20}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Implications for the Wargaming Literature}{21}{subsection.6.2}%
-\contentsline {section}{\numberline {7}Policy Recommendations}{21}{section.7}%
-\contentsline {section}{\numberline {8}Limitations and Future Research}{22}{section.8}%
-\contentsline {section}{\numberline {9}Conclusion}{23}{section.9}%
-\contentsline {section}{\numberline {A}Full Experimental Prompts}{26}{appendix.1.A}%
-\contentsline {subsection}{\numberline {A.1}Main Experiment: Zero-Shot Treatment}{26}{subsection.1.A.1}%
-\contentsline {subsubsection}{\numberline {A.1.1}Sender System Prompt}{26}{subsubsection.1.A.1.1}%
-\contentsline {subsubsection}{\numberline {A.1.2}Receiver System Prompt}{26}{subsubsection.1.A.1.2}%
-\contentsline {subsection}{\numberline {A.2}Main Experiment: Role-Conditioned Treatment}{27}{subsection.1.A.2}%
-\contentsline {subsubsection}{\numberline {A.2.1}Sender System Prompt}{27}{subsubsection.1.A.2.1}%
-\contentsline {subsubsection}{\numberline {A.2.2}Receiver System Prompt}{28}{subsubsection.1.A.2.2}%
-\contentsline {subsection}{\numberline {A.3}Sensitivity Analysis: V1 (Neutral/Abstract)}{28}{subsection.1.A.3}%
-\contentsline {subsection}{\numberline {A.4}Sensitivity Analysis: V2 (Diplomatic Framing)}{28}{subsection.1.A.4}%
-\contentsline {subsubsection}{\numberline {A.4.1}Sender System Prompt}{28}{subsubsection.1.A.4.1}%
-\contentsline {subsection}{\numberline {A.5}Sensitivity Analysis: V3 (Military/Coercive Framing)}{29}{subsection.1.A.5}%
-\contentsline {subsubsection}{\numberline {A.5.1}Sender System Prompt}{29}{subsubsection.1.A.5.1}%
-\contentsline {section}{\numberline {B}Model Parameters and API Configuration}{30}{appendix.1.B}%
-\contentsline {section}{\numberline {C}Sensitivity Analysis Summary Statistics}{30}{appendix.1.C}%
+\contentsline {subsection}{\numberline {2.3}LLMs as Strategic Agents}{7}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Our Contribution}{7}{subsection.2.4}%
+\contentsline {section}{\numberline {3}The Formal Model: A Signaling Game of Strategic Deception}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Players, Types, and Prior Beliefs}{8}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Sequence of Play}{8}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Payoffs}{8}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Equilibrium Analysis}{9}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Hypotheses}{10}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Experimental Methodology}{10}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Experimental Design}{10}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Simulation Procedure}{10}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Evaluation Metrics}{11}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Prompt Sensitivity Analysis}{11}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Results}{11}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Headline Results: Bluffing Rates}{11}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Bayesian Belief Calibration}{12}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Qualitative Analysis: The S-R-O Framework}{13}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Prompt Sensitivity Analysis}{14}{subsection.5.4}%
+\contentsline {section}{\numberline {6}Discussion}{15}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Theoretical Implications}{15}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Implications for the Wargaming Literature}{16}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Policy Recommendations}{16}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Limitations and Future Research}{16}{section.7}%
+\contentsline {section}{\numberline {8}Conclusion}{17}{section.8}%
+\contentsline {section}{\numberline {A}Full Experimental Prompts}{19}{appendix.1.A}%
+\contentsline {subsection}{\numberline {A.1}Main Experiment: Zero-Shot Treatment}{19}{subsection.1.A.1}%
+\contentsline {subsubsection}{\numberline {A.1.1}Sender System Prompt}{19}{subsubsection.1.A.1.1}%
+\contentsline {subsubsection}{\numberline {A.1.2}Receiver System Prompt}{19}{subsubsection.1.A.1.2}%
+\contentsline {subsection}{\numberline {A.2}Main Experiment: Role-Conditioned Treatment}{19}{subsection.1.A.2}%
+\contentsline {subsubsection}{\numberline {A.2.1}Sender System Prompt}{19}{subsubsection.1.A.2.1}%
+\contentsline {subsubsection}{\numberline {A.2.2}Receiver System Prompt}{19}{subsubsection.1.A.2.2}%
+\contentsline {section}{\numberline {B}Sensitivity Analysis: V1 (Neutral/Abstract)}{20}{appendix.1.B}%
+\contentsline {subsection}{\numberline {B.1}Sender System Prompt}{20}{subsection.1.B.1}%
+\contentsline {section}{\numberline {C}Sensitivity Analysis: V2 (Diplomatic Framing)}{20}{appendix.1.C}%
+\contentsline {subsection}{\numberline {C.1}Sender System Prompt}{20}{subsection.1.C.1}%
+\contentsline {section}{\numberline {D}Sensitivity Analysis: V3 (Military/Coercive Framing)}{20}{appendix.1.D}%
+\contentsline {subsection}{\numberline {D.1}Sender System Prompt}{20}{subsection.1.D.1}%
+\contentsline {section}{\numberline {E}Model Parameters and API Configuration}{21}{appendix.1.E}%
+\contentsline {section}{\numberline {F}Sensitivity Analysis Summary Statistics}{21}{appendix.1.F}%
