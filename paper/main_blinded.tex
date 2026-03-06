@@ -35,14 +35,8 @@
 
 \title{\textbf{The Bluffing Machine: Generative AI, Strategic Deception,\\ and the Limits of Deterrence Theory}}
 
-\author{
-    Tapang Ivo Tanku\\\\
-    \small{PhD Researcher, Department of Political Science}\\\
-    \small{University at Buffalo, State University of New York}\\\
-    \small{\texttt{tapangiv@buffalo.edu}}
-}
 
-\date{March 2026}
+\date{}
 
 \begin{document}
 
@@ -61,7 +55,7 @@
 
 \medskip
 
-\noindent \textbf{Replication materials:} All code, data, and figures are available at \url{https://github.com/TapangIvoTanku/the-bluffing-machine}
+\noindent \textbf{Replication materials:} The replication materials are available from the authors upon request.
 
 \end{abstract}
 
@@ -128,7 +122,7 @@ Payoffs are structured to create a classic crisis bargaining scenario. Escalatin
     - Receiver payoff: $0$.
 - If Receiver **Attacks**:
     - If Sender is **High Resolve**: War is costly for both. Payoffs: $(-1, -1)$.
-    - If Sender is **Low Resolve**: Sender capitulates. Payoffs: $(0, 1)$.
+    - If Sender is **Low Resolve**: Sender capitulates. Payoffs: $(-1, 1)$.
 
 We set $c=0.2$ for all simulations.
 
@@ -210,8 +204,8 @@ Figure \ref{fig:bluffing_freq} shows the main result. We find that no model play
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/fig2_bluffing_lollipop.png}
-    \caption{Bluffing Frequency by Model and Treatment}
-    \label{fig:bluffing_freq}
+    \caption{Bluffing Frequency by Model and Treatment}\label{fig:bluffing_freq}
+\alttext{A lollipop chart showing bluffing frequency by three AI models (GPT-4.1-mini, GPT-4.1-nano, Gemini-2.5-Flash) across two conditions (Zero-Shot and Role-Conditioned). A dashed line at 42% indicates the rational equilibrium benchmark.}
 \end{figure}
 
 \subsection{Detailed Bluffing Rates by Model and Treatment}
@@ -221,8 +215,8 @@ Figure \ref{fig:grouped_bar} provides a detailed view of bluffing rates across a
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/fig3_grouped_bar.png}
-    \caption{Bluffing Rate by Model and Treatment (Grouped Bar Chart). Error bars show 95\% Wilson confidence intervals. The dashed line marks the PBE rational benchmark of 42\%. GPT-4.1-mini's swing from 0\% to 100\% across treatment conditions is the starkest evidence of prompt-driven, non-strategic behavior.}
-    \label{fig:grouped_bar}
+    \caption{Bluffing Rate by Model and Treatment (Grouped Bar Chart). Error bars show 95\% Wilson confidence intervals. The dashed line marks the PBE rational benchmark of 42\%. GPT-4.1-mini\'s swing from 0\% to 100\% across treatment conditions is the starkest evidence of prompt-driven, non-strategic behavior.}\label{fig:grouped_bar}
+\alttext{A grouped bar chart detailing bluffing rates for three AI models under two different experimental treatments. Error bars show 95% confidence intervals, and a dashed line at 42% marks the rational PBE benchmark.}
 \end{figure}
 
 \subsection{Reasoning Trace Analysis}
@@ -232,19 +226,19 @@ To understand the concepts driving strategic choices, we conducted a keyword ana
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/fig4_reasoning_heatmap.png}
-    \caption{Reasoning Trace Keyword Analysis. Each cell shows the percentage of reasoning traces containing the given concept keyword. The stark contrast between zero-shot and role-conditioned conditions confirms that surface-level prompt framing, not deep strategic reasoning, drives LLM behavior.}
-    \label{fig:heatmap}
+    \caption{Reasoning Trace Keyword Analysis. Each cell shows the percentage of reasoning traces containing the given concept keyword. The stark contrast between zero-shot and role-conditioned conditions confirms that surface-level prompt framing, not deep strategic reasoning, drives LLM behavior.}\label{fig:heatmap}
+\alttext{A heatmap showing the percentage of AI reasoning traces that contain seven different strategic concepts, broken down by model and experimental condition. The color intensity indicates the frequency of each concept.}
 \end{figure}
 
 \subsection{Payoff Distributions and Welfare Analysis}
 
-Figure \ref{fig:payoffs} presents the payoff distributions for Senders and Receivers across all experimental cells. Sender payoffs are consistently high (median 0.80 across all conditions), reflecting that Senders benefit from the Receiver's failure to correctly infer their type. Receiver payoffs, by contrast, are at or near zero in most conditions, with GPT-4.1-nano in the role-conditioned treatment producing negative median payoffs ($-$0.07), indicating that the Receiver is actively harmed by the Sender's bluffing. This asymmetry is a hallmark of strategic deception: the deceiver benefits at the expense of the deceived.
+Figure \ref{fig:payoffs} presents the payoff distributions for Senders and Receivers across all experimental cells. Sender payoffs are consistently high (median 0.80 across all conditions), reflecting that Senders benefit from the Receiver\'s failure to correctly infer their type. Receiver payoffs, by contrast, are at or near zero in most conditions, with GPT-4.1-nano in the role-conditioned treatment producing negative median payoffs ($-$0.07), indicating that the Receiver is actively harmed by the Sender\'s bluffing. This asymmetry is a hallmark of strategic deception: the deceiver benefits at the expense of the deceived.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/fig5_payoff_distributions.png}
-    \caption{Payoff Distributions by Model and Treatment. Violin plots show the full distribution of payoffs; white dots indicate the median. The consistent gap between Sender and Receiver payoffs demonstrates the welfare consequences of non-equilibrium strategic behavior.}
-    \label{fig:payoffs}
+    \caption{Payoff Distributions by Model and Treatment. Violin plots show the full distribution of payoffs; white dots indicate the median. The consistent gap between Sender and Receiver payoffs demonstrates the welfare consequences of non-equilibrium strategic behavior.}\label{fig:payoffs}
+\alttext{A series of violin plots showing the distribution of payoffs for Sender and Receiver agents across six experimental conditions. White dots indicate the median payoff for each distribution.}
 \end{figure}
 
 \subsection{Qualitative Analysis: The S-R-O Framework}
@@ -255,14 +249,14 @@ To understand the reasoning behind these choices, we applied our S-R-O coding fr
     \item \textbf{Signal Justification:} Most justifications are based on perceived capabilities or risk avoidance. Explicit strategic deception is rare (less than 20\% of traces).
     \item \textbf{Deception Awareness:} In the role-conditioned treatment, models show some awareness of deception, but in the zero-shot condition, they are almost entirely honest.
     \item \textbf{Receiver Inference:} Receivers overwhelmingly claim to be performing a Bayesian update (98.7\%), but the calibration curves show this is not true.
-    \item \textbf{Belief Attribution:} All models show a high degree of belief attribution, explicitly modeling the opponent's beliefs in their reasoning.
+    \item \textbf{Belief Attribution:} All models show a high degree of belief attribution, explicitly modeling the opponent\'s beliefs in their reasoning.
 \end{itemize}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/fig8_sro_qualitative_analysis.png}
-    \caption{S-R-O Qualitative Coding Analysis. Results from coding 150 stratified reasoning traces across all experimental cells. The framework reveals that models justify signals primarily through capability and risk-avoidance reasoning, not genuine strategic deception.}
-    \label{fig:sro}
+    \caption{S-R-O Qualitative Coding Analysis. Results from coding 150 stratified reasoning traces across all experimental cells. The framework reveals that models justify signals primarily through capability and risk-avoidance reasoning, not genuine strategic deception.}\label{fig:sro}
+\alttext{A composite figure summarizing the Signal-Reason-Outcome (S-R-O) qualitative coding of AI reasoning traces. It includes bar charts for signal justification, deception awareness, and other key reasoning categories.}
 \end{figure}
 
 \subsection{Comprehensive Results Overview}
@@ -272,8 +266,8 @@ Figure \ref{fig:dashboard} presents a complete summary dashboard of all six key 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/fig6_summary_dashboard.png}
-    \caption{Complete Results Dashboard: Six Metrics by Model and Treatment. The dashboard synthesizes bluff rate, bluff success rate, Brier score, Equilibrium Deviation Index, average Sender payoff, and average Receiver payoff across all 900 simulated games. No model achieves the PBE benchmark on any metric.}
-    \label{fig:dashboard}
+    \caption{Complete Results Dashboard: Six Metrics by Model and Treatment. The dashboard synthesizes bluff rate, bluff success rate, Brier score, Equilibrium Deviation Index, average Sender payoff, and average Receiver payoff across all 900 simulated games. No model achieves the PBE benchmark on any metric.}\label{fig:dashboard}
+\alttext{A dashboard of 18 small plots summarizing six key performance metrics across three AI models and two experimental conditions. The metrics include bluff rate, Brier score, and average payoffs.}
 \end{figure}
 
 \subsection{Prompt Sensitivity Analysis}
@@ -283,8 +277,8 @@ Figure \ref{fig:sensitivity} shows the results of the sensitivity analysis. We f
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/fig7_sensitivity_analysis.png}
-    \caption{Prompt Sensitivity Analysis Results}
-    \label{fig:sensitivity}
+    \caption{Prompt Sensitivity Analysis Results}\label{fig:sensitivity}
+\alttext{A bar chart showing the bluffing rate of the GPT-4.1-mini model under three different prompt framing conditions: Neutral, Diplomatic, and Military. The bluffing rate is 0% in all three conditions.}
 \end{figure}
 
 \section{Discussion}
@@ -309,11 +303,15 @@ Based on our findings, we offer three policy recommendations:
 
 \section{Limitations and Future Research}
 
-This study has several limitations. First, our game is a highly stylized representation of a real-world crisis. Future research should explore more complex games with more players, actions, and types. Second, we only test three models. Future work should test a wider range of models, including proprietary models from government and industry. Third, our qualitative analysis is based on a sample of reasoning traces. Future work could use more advanced NLP techniques to analyze the full corpus of reasoning. Fourth, we do not explore the impact of model temperature on strategic behavior. Finally, the ecological validity of our findings is limited by the artificial nature of the experimental setup.
+This study has several limitations. First, our game is a highly stylized representation of a real-world crisis. A critic might rightly question the ecological validity of a simple, binary signaling game. However, this stylization is a deliberate methodological choice. By abstracting away the complexities of real-world crises, the signaling game framework provides a controlled experimental environment that allows us to isolate and test a foundational strategic mechanism: deception. While less realistic on the surface, this approach provides a degree of analytical rigor and causal leverage that is difficult to achieve in more complex, open-ended simulations. Understanding how LLMs behave in this simple, foundational case is a necessary prerequisite for analyzing their behavior in more complex settings. Future research should build on this foundation by exploring more complex games with more players, actions, and information asymmetries.
+
+Second, we only test three publicly available models. Future work should test a wider range of models, including proprietary models from government and industry, which may be fine-tuned on different data. Third, our qualitative analysis is based on a stratified sample of reasoning traces. Future work could use more advanced NLP techniques to analyze the full corpus of reasoning to identify more subtle patterns. Finally, we do not explore the impact of model temperature and other hyperparameters on strategic behavior, which remains an important avenue for future research.
 
 \section{Conclusion}
 
-This paper asked whether LLMs can bluff. The answer is yes, but not for the right reasons. We find that LLMs can be prompted to engage in deceptive behavior, but they do so in a way that is brittle, inconsistent, and far from rational. The gap between strategic language and strategic action is the most important finding of this paper. As we integrate AI more deeply into our national security infrastructure, understanding and managing this gap will be one of the most critical challenges of our time.
+This paper asked whether LLMs can bluff. The answer is yes, but not for the right reasons. We find that LLMs can be prompted to engage in deceptive behavior, but they do so in a way that is brittle, inconsistent, and untethered from a coherent strategic logic. The gap between their ability to mimic the language of strategy and their ability to execute a rational strategic plan is the most important finding of this paper.
+
+This finding has profound implications for deterrence theory. Thomas Schelling famously argued that in strategic interaction, there can be a "rationality of irrationality"---a feigned madness or calculated loss of control that enhances bargaining power by manipulating shared risk. Our findings suggest that LLMs exhibit a kind of *accidental irrationality*. Their behavior is not a calculated strategy of feigned madness, but a brittle, unpredictable artifact of their training data and prompt design. This is not the rationality of irrationality, but the irrationality of non-rationality. It is not a source of strategic advantage, but a profound source of risk, as it is untethered from any coherent theory of victory or cost-benefit analysis. As we integrate AI more deeply into our national security infrastructure, understanding and managing this gap between strategic language and strategic action will be one of the most critical challenges of our time.
 
 \bibliographystyle{apalike}
 \bibliography{references}
