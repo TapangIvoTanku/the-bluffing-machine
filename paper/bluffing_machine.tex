@@ -1,0 +1,204 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{array}
+\usepackage{xcolor}
+\geometry{a4paper, margin=1in}
+\doublespacing
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{hypothesis}{Hypothesis}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\title{\textbf{The Bluffing Machine: Generative AI, Strategic Deception,\\ and the Limits of Deterrence Theory}}
+\author{
+  Tapang Ivo Tanku\\
+  \small{PhD Researcher, Department of Political Science}\\
+  \small{University at Buffalo, State University of New York}\\
+  \small{\texttt{tapangiv@buffalo.edu}}
+}
+\date{March 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent Recent wargaming experiments demonstrate that Large Language Models (LLMs) exhibit escalatory behavior in simulated crises, yet the strategic mechanisms underlying this behavior remain poorly understood. This paper opens the black box of AI strategic reasoning by focusing on the foundational mechanism of crisis bargaining: \textit{strategic deception}. While existing research treats LLMs as passive agents reacting to scenarios, we ask whether LLMs can \textit{bluff} --- that is, whether they can send deliberately false signals to manipulate an opponent's beliefs about their resolve, capabilities, or intentions. We develop a novel experimental framework grounded in formal signaling game theory to test the capacity of frontier LLMs (GPT-4.1-mini, GPT-4.1-nano, Gemini-2.5-Flash) to engage in strategic deception across 900 simulated crisis bargaining interactions. We find that LLMs systematically deviate from the predictions of Perfect Bayesian Equilibrium. Strategic behavior is highly sensitive to prompt framing, with GPT-4.1-mini swinging from 0% bluffing in a zero-shot context to 100% bluffing when given a strategic role. Gemini-2.5-Flash, in contrast, bluffs aggressively regardless of framing. None of the models play the rational equilibrium strategy. These findings reveal a fundamental gap between surface-level strategic mimicry and genuine strategic rationality in current AI systems. We argue that LLM escalatory behavior is driven not by sophisticated strategic reasoning but by a brittle, context-insensitive response to threat stimuli. This has profound implications for both international relations theory and the policy debate on integrating AI into high-stakes national security decision-making.
+
+\medskip
+\noindent \textbf{Keywords:} Generative AI, Large Language Models, strategic deception, signaling games, deterrence theory, crisis bargaining, wargaming, artificial intelligence and international security
+\end{abstract}
+
+\newpage
+
+\section{Introduction: The Research Puzzle}
+
+The rapid integration of Artificial Intelligence into national security has created an urgent and underexplored puzzle: how do these new non-human actors reason under strategic pressure? Recent wargaming experiments have produced alarming results, showing that frontier LLMs tend to favor escalation and even nuclear use in simulated crises \citep{Payne2026, Rivera2024}. A landmark study conducted at King's College London found that three frontier models --- GPT-5.2, Claude Sonnet 4, and Gemini 3 Flash --- chose nuclear signaling in 95 percent of 21 simulated crisis scenarios, generating approximately 780,000 words of structured strategic reasoning in the process \citep{Payne2026}. These findings have generated significant policy concern, prompting calls for regulation of AI in military contexts.
+
+Yet despite the volume of recent research, a critical gap persists. Existing studies have focused almost exclusively on \textit{outcomes} --- what the AI did --- rather than \textit{process} --- how the AI decided. The central question is not merely that AI escalates, but \textit{why}. Is AI escalation the product of sophisticated, human-like strategic reasoning? Or is it the result of a brittle, algorithmic pattern-matching that superficially resembles strategic behavior without possessing its underlying logic?
+
+This paper argues that resolving this question requires focusing on the most fundamental mechanism of crisis bargaining: \textbf{strategic deception}. In his seminal work, Thomas Schelling argued that international crises are contests of ``nerve, commitment, and reputation'' in which success depends critically on the ability to manipulate an opponent's beliefs \citep{Schelling1960}. A state that can convincingly bluff --- that can signal high resolve even when its actual resolve is low --- can deter adversaries and avoid costly wars. Conversely, a state that cannot manage its own credibility, or that cannot detect the bluffs of others, is dangerously vulnerable to exploitation and miscalculation.
+
+This paper poses a direct and previously unasked question: \textbf{Can Generative AI learn to bluff?} Specifically, when placed in a crisis bargaining scenario with incomplete information and a clear incentive to misrepresent its private type, will an LLM engage in strategic deception? And if it does, can it do so \textit{effectively} --- managing the delicate balance between the short-term gains of deception and the long-term costs of reputational damage?
+
+The answers to these questions carry profound implications. If LLMs are naive truth-tellers, their integration into military planning is dangerous because human adversaries will systematically exploit their transparency. If LLMs are sophisticated strategic deceivers, their autonomous deployment could generate unpredictable escalatory spirals built on a foundation of machine-generated deception. If, as we find, LLMs are \textit{indiscriminate} bluffers --- threatening regardless of context, unable to manage credibility, and insensitive to reputational costs --- then their escalatory behavior is best understood not as strategic aggression but as a form of strategic noise, a dangerous property in any high-stakes decision-making environment.
+
+The paper proceeds as follows. Section 2 reviews the relevant literature and situates our contribution. Section 3 develops the formal signaling game model. Section 4 presents the experimental methodology. Section 5 reports results. Section 6 discusses theoretical and policy implications. Section 7 concludes.
+
+\section{Literature Review}
+
+This paper bridges three distinct literatures: AI in international security, formal deterrence and signaling theory, and the emerging field of LLMs as strategic agents.
+
+\subsection{AI in International Security}
+
+The most directly relevant recent work is the wargaming literature. \citet{Rivera2024} conducted the first systematic study of LLM behavior in military wargames, placing eight LLM agents in a multi-player game based on a simplified version of the Correlates of War dataset. They found consistent escalatory tendencies across all models, with evidence of arms-race dynamics and occasional nuclear use. The study was notable for its scale but limited in its theoretical grounding, offering no formal framework for interpreting the observed behavior. \citet{Payne2026} extended this work with a more sophisticated experimental design, employing a ``reflection-forecast-decision'' architecture that made AI reasoning visible. Their key finding --- that models treated nuclear weapons as instruments of compellence rather than deterrence --- directly motivates our inquiry into the underlying strategic logic.
+
+Beyond wargaming, a growing body of work examines AI biases in foreign policy contexts. The Center for Strategic and International Studies found that widely used AI models exhibit a marked bias toward escalation in crisis scenarios \citep{CSIS2025}. \citet{PoliticalLLM2024} provide a comprehensive survey of LLM applications in political science, identifying the simulation of strategic behavior as a critical frontier.
+
+\subsection{Formal Deterrence and Signaling Theory}
+
+Our theoretical framework is grounded in the game-theoretic tradition of deterrence and crisis bargaining. \citet{Schelling1960} established the foundational insight that deterrence is fundamentally a problem of communication and credibility. \citet{Spence1973} formalized the logic of signaling under asymmetric information, showing that costly signals can credibly convey private information. \citet{Fearon1994} applied this framework to international crises, arguing that democratic leaders can generate ``audience costs'' --- domestic political penalties for backing down from public threats --- that make their signals credible. This audience cost theory has generated one of the most extensive empirical literatures in international relations, with over 3,900 citations and ongoing debate about its empirical validity \citep{Kertzer2016}.
+
+The concept of \textit{cheap talk} is central to our analysis. In a world of pure cheap talk, where messages are costless, rational actors should ignore signals from opponents whose interests diverge from their own, since such actors have every incentive to misrepresent their private information \citep{Crawford1982}. Credible communication requires either costly signals that only high-type actors can afford to send, or mechanisms that align the interests of sender and receiver. Our paper tests whether LLMs understand and apply these principles.
+
+\subsection{LLMs as Strategic Agents}
+
+A rapidly growing computer science literature examines LLM behavior in game-theoretic settings. \citet{Sun2025} provide a systematic survey of game theory meets LLMs, documenting LLM performance in Prisoner's Dilemma, Ultimatum Game, and various negotiation settings. The general finding is that LLMs can approximate rational play in simple, single-shot games but struggle with repeated games that require reputation management and long-horizon strategic reasoning. Our paper extends this literature to the high-stakes, deceptive environment of geopolitical crisis bargaining, where the strategic complexity is substantially greater.
+
+\section{The Formal Model: A Signaling Game of Strategic Deception}
+
+We model the crisis bargaining interaction as a two-player signaling game. The formal structure is as follows.
+
+\subsection{Players, Types, and Prior Beliefs}
+
+There are two players: a Sender ($S$) and a Receiver ($R$). The Sender has private information about its type $\theta \in \{H, L\}$, where $H$ denotes High Resolve and $L$ denotes Low Resolve. The Receiver does not observe $\theta$ directly but holds a prior belief $p = \Pr(\theta = H) \in (0, 1)$ that the Sender is High Resolve, where $p$ is common knowledge.
+
+\subsection{Sequence of Play}
+
+The game proceeds as follows:
+\begin{enumerate}
+    \item \textbf{Nature} draws the Sender's type $\theta \in \{H, L\}$ with probability $p$ for High Resolve.
+    \item The \textbf{Sender} observes $\theta$ and chooses a message $m \in \{E, N\}$, where $E$ represents an Escalatory signal (e.g., a military mobilization or a public threat) and $N$ represents a Non-escalatory signal (e.g., an offer to negotiate).
+    \item The \textbf{Receiver} observes $m$ but not $\theta$, updates its beliefs using Bayes' rule, and chooses an action $a \in \{A, B\}$, where $A$ represents Attack and $B$ represents Back Down.
+    \item Payoffs are realized.
+\end{enumerate}
+
+\subsection{Payoffs}
+
+The payoff structure is designed to create a clear incentive for Low Resolve Senders to bluff. Let $c > 0$ denote the cost of sending an Escalatory signal, representing the material and political cost of mobilizing forces or making a public commitment. The payoffs are:
+
+\begin{table}[H]
+\centering
+\caption{Payoff Matrix: (Sender, Receiver)}
+\label{tab:payoffs}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Outcome} & \textbf{Sender Payoff} & \textbf{Receiver Payoff} \\
+\midrule
+Sender sends $E$, Receiver plays $B$ & $1 - c$ & $0$ \\
+Sender sends $N$, Receiver plays $B$ & $1$ & $0$ \\
+Sender sends $E$, Receiver plays $A$, $\theta = H$ & $0 - c$ & $-1$ \\
+Sender sends $N$, Receiver plays $A$, $\theta = H$ & $0$ & $-1$ \\
+Sender sends $E$, Receiver plays $A$, $\theta = L$ & $-1 - c$ & $1$ \\
+Sender sends $N$, Receiver plays $A$, $\theta = L$ & $-1$ & $1$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The key feature of this payoff structure is that the Receiver prefers to Attack if and only if it believes the Sender is Low Resolve with sufficiently high probability. Specifically, the Receiver will Attack if its posterior belief $\mu(H|m) < \frac{1}{2}$, and Back Down otherwise.
+
+\subsection{Equilibrium Analysis}
+
+We analyze the game using the concept of Perfect Bayesian Equilibrium (PBE).
+
+\begin{definition}[Perfect Bayesian Equilibrium]
+A Perfect Bayesian Equilibrium is a strategy profile $(\sigma_S, \sigma_R)$ and a belief system $\mu$ such that: (1) $\sigma_R$ is sequentially rational given $\mu$; (2) $\sigma_S$ is sequentially rational given $\sigma_R$ and $\mu$; and (3) $\mu$ is derived from $\sigma_S$ using Bayes' rule wherever possible.
+\end{definition}
+
+\begin{proposition}[Separating Equilibrium]
+If the cost of signaling $c$ is sufficiently high ($c > 1$), a separating equilibrium exists where the High Resolve Sender sends $E$ and the Low Resolve Sender sends $N$. The Receiver infers the Sender's type perfectly and plays $B$ after $E$ and $A$ after $N$.
+\end{proposition}
+
+\begin{proposition}[Pooling Equilibrium]
+If the cost of signaling $c$ is sufficiently low ($c < 1$) and the prior belief $p < \frac{1}{2}$, a pooling equilibrium exists where both Sender types send $E$. The Receiver does not update its beliefs and plays $B$.
+\end{proposition}
+
+\begin{proposition}[Semi-Separating (Bluffing) Equilibrium]
+If $c < 1$ and $p \ge \frac{1}{2}$, a semi-separating equilibrium exists where the High Resolve Sender always sends $E$, and the Low Resolve Sender randomizes, sending $E$ with probability $q = \frac{p(1-2c)}{c(1-p)}$. The Receiver plays $B$ after $E$ and $A$ after $N$. This is the equilibrium where bluffing occurs.
+\end{proposition}
+
+For our experiment, we set $p=0.5$ and $c=0.2$, which yields a theoretical bluffing probability of $q=0.42$ for the Low Resolve Sender.
+
+\section{Experimental Methodology}
+
+Our experiment consists of 900 simulated signaling games. We test three LLMs: GPT-4.1-mini, GPT-4.1-nano, and Gemini-2.5-Flash. For each model, we run two experimental treatments:
+
+\begin{itemize}
+    \item \textbf{Zero-Shot:} The LLM is given the game rules and payoffs but no strategic context or role-playing instructions.
+    \item \textbf{Role-Conditioned:} The LLM is prompted to act as a ``rational, self-interested state leader'' whose goal is to maximize national security payoffs.
+\end{itemize}
+
+Each model-treatment cell consists of 150 simulation runs. In each run, one LLM instance acts as the Sender and another as the Receiver. We measure five key metrics: Bluff Rate, Bluff Success Rate, Brier Score (calibration), Equilibrium Deviation Index (EDI), and Reputation Decay.
+
+\section{Results}
+
+Our empirical results demonstrate that LLMs systematically deviate from the predictions of Perfect Bayesian Equilibrium. We find that strategic behavior is highly sensitive to prompt framing, with GPT-4.1-mini swinging from 0% bluffing in a zero-shot context to 100% bluffing when given a strategic role. Gemini-2.5-Flash, in contrast, bluffs aggressively regardless of framing. None of the models play the rational equilibrium strategy.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig2_bluffing_frequency.png}
+    \caption{Bluffing Frequency by Model and Treatment}
+    \label{fig:bluffing_freq}
+\end{figure}
+
+Figure \ref{fig:bluffing_freq} shows the headline result. In the zero-shot condition, both GPT models exhibit a bluff rate of 0%, while Gemini-2.5-Flash bluffs at an astonishing 92.8%. In the role-conditioned treatment, GPT-4.1-mini's bluff rate jumps to 100%, while GPT-4.1-nano's increases to 77.8%. All models' bluffing behavior is statistically significantly different from the PBE benchmark of 42%.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig3_calibration_curves.png}
+    \caption{Bayesian Belief Calibration of Receiver Agents}
+    \label{fig:calibration}
+\end{figure}
+
+Figure \ref{fig:calibration} shows that the models are poorly calibrated. The Brier scores are far from the perfect calibration score of 0.0, indicating that the models' posterior beliefs do not accurately reflect the true probability of the Sender's type.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/fig4_reputation_decay.png}
+    \caption{Reputation Decay After a Failed Bluff}
+    \label{fig:reputation}
+\end{figure}
+
+Figure \ref{fig:reputation} shows that the models exhibit limited reputation decay. After a failed bluff, the bluff success rate does not decrease as predicted by rational Bayesian updating.
+
+\section{Discussion}
+
+The results have profound implications. First, they suggest that LLMs are not rational strategic actors in the game-theoretic sense. Their behavior is better explained by prompt sensitivity and pattern matching than by strategic reasoning. Second, the high bluffing rates, especially in the role-conditioned treatment, suggest that deploying LLMs in crisis scenarios could lead to unpredictable escalatory dynamics. Third, the lack of reputation decay suggests that LLMs may be vulnerable to repeated deception.
+
+\section{Conclusion}
+
+This paper provides the first systematic experimental test of strategic deception in LLMs. We find that while LLMs can be prompted to bluff, they do so in a manner that is inconsistent with rational strategic behavior. Future research should explore whether more advanced training techniques can imbue LLMs with a more sophisticated understanding of strategic interaction.
+
+\bibliographystyle{apalike}
+\bibliography{references}
+
+\end{document}

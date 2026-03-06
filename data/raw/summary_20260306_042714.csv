@@ -1,0 +1,7 @@
+model_key,model_name,treatment,n_sims,bluff_rate,bluff_success_rate,brier_score,edi,avg_sender_payoff,avg_receiver_payoff,avg_latency_ms,total_tokens,cell_duration_s
+gpt-4.1-mini,GPT-4.1-mini,zero_shot,150,0.0,0.0,0.0742,0.2652,0.356,0.28,3410.6,71177,511.6
+gpt-4.1-mini,GPT-4.1-mini,role_conditioned,150,1.0,1.0,0.3029,0.2133,0.8,0.0,3540.5,69882,531.1
+gpt-4.1-nano,GPT-4.1-nano,zero_shot,150,0.0,0.0,0.0817,0.279,0.4307,0.0333,2098.2,66417,314.7
+gpt-4.1-nano,GPT-4.1-nano,role_conditioned,150,0.7778,0.8254,0.2683,0.2698,0.4573,-0.0667,2133.7,65666,320.1
+gemini-2.5-flash,Gemini-2.5-Flash,zero_shot,150,0.9277,1.0,0.3135,0.2734,0.7947,0.0067,2041.4,73593,306.2
+gemini-2.5-flash,Gemini-2.5-Flash,role_conditioned,150,0.8933,1.0,0.3014,0.2648,0.7973,0.0067,6160.7,71006,924.1
