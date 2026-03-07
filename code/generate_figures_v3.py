@@ -308,11 +308,6 @@ ax.set_yticklabels(list(keywords.keys()), fontsize=11)
 for sep in [1.5, 3.5]:
     ax.axvline(sep, color='white', linewidth=3.5)
 
-for xi, (model, color) in enumerate(zip(MODELS, [MINI_C, NANO_C, GEM_C])):
-    short = model.replace('GPT-4.1-', 'GPT-').replace('Gemini-2.5-Flash', 'Gemini')
-    ax.text(xi*2 + 0.5, -1.1, short, ha='center', va='top',
-            fontsize=11, fontweight='bold', color=color)
-
 cbar = plt.colorbar(im, ax=ax, fraction=0.018, pad=0.02)
 cbar.set_label('% of reasoning traces\ncontaining keyword', fontsize=9.5)
 cbar.ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'{x*100:.0f}%'))
@@ -320,7 +315,12 @@ cbar.ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'{x*100:.0f}%'
 ax.set_title(
     'Figure 4: Reasoning Trace Keyword Analysis\n'
     'What Concepts Do LLMs Invoke When Making Strategic Signaling Decisions?',
-    fontsize=13, fontweight='bold', pad=18)
+    fontsize=13, fontweight='bold', pad=14)
+
+# Model group bracket lines — draw a colored underline under each pair of columns
+for xi, color in enumerate([MINI_C, NANO_C, GEM_C]):
+    ax.axvline(xi*2 - 0.5, color=color, linewidth=2.5, alpha=0.5, linestyle=':')
+ax.axvline(5.5, color=GEM_C, linewidth=2.5, alpha=0.5, linestyle=':')
 
 plt.tight_layout()
 plt.savefig(f"{OUT_DIR}/fig4_reasoning_heatmap.png")
@@ -330,7 +330,7 @@ print("✓ Fig 4 saved")
 # ═══════════════════════════════════════════════════════════════════════════════
 # FIG 5 — Violin plots: Payoff distributions
 # ═══════════════════════════════════════════════════════════════════════════════
-fig, axes = plt.subplots(1, 2, figsize=(14, 6), sharey=False)
+fig, axes = plt.subplots(1, 2, figsize=(18, 7), sharey=False)
 fig.patch.set_facecolor(BG)
 
 for ax_idx, (payoff_col, title, ylabel) in enumerate([
@@ -358,10 +358,10 @@ for ax_idx, (payoff_col, title, ylabel) in enumerate([
                 short_m = m.replace('GPT-4.1-', 'GPT-').replace('Gemini-2.5-Flash', 'Gemini')
                 xtick_labels.append(f"{short_m}\n{TREAT_LABELS[t]}")
                 pos += 1
-        pos += 0.4  # gap between models
+        pos += 0.8  # wider gap between models
 
     if data_list:
-        parts = ax.violinplot(data_list, positions=positions, widths=0.7,
+        parts = ax.violinplot(data_list, positions=positions, widths=0.6,
                               showmedians=False, showextrema=False)
         for pc, c in zip(parts['bodies'], colors_list):
             pc.set_facecolor(c)
@@ -369,11 +369,17 @@ for ax_idx, (payoff_col, title, ylabel) in enumerate([
             pc.set_edgecolor('white')
 
         # Median dots and labels
-        for pos_i, vals, c in zip(positions, data_list, colors_list):
-            med = np.median(vals)
+        for idx_p, (pos_i, vals_i, c) in enumerate(zip(positions, data_list, colors_list)):
+            med = np.median(vals_i)
             ax.scatter(pos_i, med, s=60, color='white', zorder=5, edgecolors=c, linewidths=2)
-            ax.text(pos_i, med + 0.04, f'Md={med:.2f}',
-                    ha='center', va='bottom', fontsize=8.5, fontweight='bold', color=c)
+            # Place label above the violin — stagger vertically by model index to avoid overlap
+            model_idx = idx_p // 2
+            treat_idx = idx_p % 2
+            label_y = 0.92 - treat_idx * 0.12  # stagger: zero-shot at 0.92, role-cond at 0.80 (axes fraction)
+            ax.text(pos_i, label_y, f'Md={med:.2f}',
+                    ha='center', va='center', fontsize=8, fontweight='bold', color=c,
+                    transform=ax.get_xaxis_transform(),
+                    bbox=dict(boxstyle='round,pad=0.25', facecolor='white', edgecolor=c, alpha=0.9, linewidth=1.0))
 
         ax.set_xticks(positions)
         ax.set_xticklabels(xtick_labels, fontsize=8.5, rotation=20, ha='right')
@@ -391,9 +397,9 @@ legend_patches = [
     mpatches.Patch(color=ROLE_C, alpha=0.65, label='Role-Conditioned'),
 ]
 fig.legend(handles=legend_patches, loc='lower center', ncol=2, fontsize=10.5,
-           title='Treatment', title_fontsize=10.5, bbox_to_anchor=(0.5, -0.04))
+           title='Treatment', title_fontsize=10.5, bbox_to_anchor=(0.5, -0.07))
 
-plt.tight_layout(w_pad=3)
+plt.tight_layout(w_pad=3, rect=[0, 0.05, 1, 1])
 plt.savefig(f"{OUT_DIR}/fig5_payoff_distributions.png")
 plt.close()
 print("✓ Fig 5 saved")
@@ -429,9 +435,9 @@ for m in MODELS:
         metrics_data[(m, t)] = {'br': br, 'bs': bs, 'brier': brier,
                                  'edi': edi, 'sp': sp, 'rp': rp}
 
-fig = plt.figure(figsize=(17, 10))
+fig = plt.figure(figsize=(17, 11))
 fig.patch.set_facecolor(BG)
-gs = GridSpec(2, 3, figure=fig, hspace=0.60, wspace=0.40)
+gs = GridSpec(2, 3, figure=fig, hspace=0.80, wspace=0.45)
 
 panel_cfg = [
     ('br',    'Bluff Rate',                  '%',      True,  0.42, 'PBE=42%'),
@@ -464,15 +470,15 @@ for idx, (metric, title, unit, show_pbe, ref_val, ref_label) in enumerate(panel_
         fmt = f'{v*100:.0f}%' if unit == '%' else f'{v:.2f}'
         if abs(h) < 0.01:
             ax.text(bar.get_x() + bar.get_width()/2,
-                    0.01 if h >= 0 else -0.01,
+                    0.02 if h >= 0 else -0.02,
                     fmt, ha='center', va='bottom' if h >= 0 else 'top',
-                    fontsize=9, fontweight='bold', color=color)
+                    fontsize=8.5, fontweight='bold', color=color)
         else:
-            offset = abs(h) * 0.06 + 0.005
+            offset = abs(h) * 0.08 + 0.015
             ax.text(bar.get_x() + bar.get_width()/2,
                     h + offset if h >= 0 else h - offset,
                     fmt, ha='center', va='bottom' if h >= 0 else 'top',
-                    fontsize=9, fontweight='bold', color=color)
+                    fontsize=8.5, fontweight='bold', color=color)
 
     for bar, v in zip(bars_z, vals_z): label_bar(bar, v, ZERO_C)
     for bar, v in zip(bars_r, vals_r): label_bar(bar, v, ROLE_C)
@@ -484,11 +490,14 @@ for idx, (metric, title, unit, show_pbe, ref_val, ref_label) in enumerate(panel_
             ax.text(len(MODELS)-0.5, ref_val, ref_label, ha='right', va='bottom',
                     fontsize=8, color=PBE_C if show_pbe else '#888', fontstyle='italic')
 
-    ax.set_title(title, fontsize=11, fontweight='bold', pad=6)
+    ax.set_title(title, fontsize=11, fontweight='bold', pad=22)
     ax.set_xticks(x)
     ax.set_xticklabels(short_names, fontsize=9.5)
     if unit == '%':
         ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, _: f'{y*100:.0f}%'))
+        ax.set_ylim(0, 1.30)  # extra headroom for labels
+    elif unit == 'score':
+        ax.set_ylim(0, max([v for v in vals_z + vals_r if v is not None and not np.isnan(v)], default=0.5) * 1.35)
     ax.spines['left'].set_alpha(0.4)
 
 legend_patches = [
@@ -685,14 +694,13 @@ if os.path.exists(sro_path):
         ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'{x*100:.0f}%'))
         ax.set_xlim(0, 1.20)
 
-        # Key finding annotation — placed below the bars to avoid title overlap
+        # Key finding annotation — placed in upper-left corner, away from bars
         if vals and vals[0] > 0.5:
-            ax.annotate(
-                f'Key finding: {vals[0]*100:.0f}% of receivers\nclaim Bayesian updating\nbut calibration shows they do not',
-                xy=(vals[0], 0), xytext=(0.40, -0.35),
+            ax.text(0.97, 0.50,
+                f'Key finding:\n{vals[0]*100:.0f}% of receivers\nclaim Bayesian updating\nbut calibration shows\nthey do not',
+                transform=ax.transAxes, ha='right', va='center',
                 fontsize=8.5, color='#333',
-                arrowprops=dict(arrowstyle='->', color='#555', lw=1),
-                bbox=dict(boxstyle='round,pad=0.3', facecolor='#FFF9C4', edgecolor='#CCC', alpha=0.95))
+                bbox=dict(boxstyle='round,pad=0.4', facecolor='#FFF9C4', edgecolor='#CCC', alpha=0.95))
 
     # ── Panel D: Belief Attribution Heatmap ───────────────────────────────────
     ax = axes[1, 1]
@@ -722,7 +730,7 @@ if os.path.exists(sro_path):
         plt.colorbar(im, ax=ax, fraction=0.04, pad=0.04,
                      format=plt.FuncFormatter(lambda x, _: f'{x*100:.0f}%'))
 
-    plt.tight_layout(h_pad=3.5, w_pad=3)
+    plt.tight_layout(h_pad=4.5, w_pad=3.5)
     plt.savefig(f"{OUT_DIR}/fig8_sro_qualitative_analysis.png")
     plt.close()
     print("✓ Fig 8 saved")
