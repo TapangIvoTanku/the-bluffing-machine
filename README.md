@@ -1,10 +1,16 @@
 # The Bluffing Machine: Replication Repository
 
-> **Paper:** "The Bluffing Machine: Generative AI, Strategic Deception, and the Limits of Deterrence Theory"
+[![SSRN](https://img.shields.io/badge/SSRN-6361838-blue)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6361838)
+[![License: MIT](https://img.shields.io/badge/Code-MIT_License-green)](LICENSE)
+[![License: CC BY 4.0](https://img.shields.io/badge/Data-CC_BY_4.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
+[![Status: Under Review](https://img.shields.io/badge/Status-Under_Review-orange)]()
+
+> **Paper:** "The Bluffing Machine: Large Language Models as Strategic Deceivers in Crisis Bargaining"
 > **Author:** Tapang Ivo Tanku, University at Buffalo, SUNY
 > **Contact:** tapangiv@buffalo.edu
-> **SSRN Preprint:** *(forthcoming)*
-> **Status:** Under review
+> **SSRN Preprint:** [https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6361838](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6361838)
+> **Submitted to:** *Journal of Global Security Studies* (Manuscript ID: JoGSS-2026-084)
+> **Submitted:** March 6, 2026
 
 ---
 
@@ -12,7 +18,7 @@
 
 This repository contains the complete replication package for the paper. It includes all source code, raw experimental data, processed datasets, analysis scripts, and publication-quality figures needed to fully replicate all results reported in the paper.
 
-The paper runs the first formal experimental test of whether Large Language Models (LLMs) can engage in **strategic deception** in a crisis bargaining context, using a signaling game framework grounded in Perfect Bayesian Equilibrium theory.
+The paper runs the first formal experimental test of whether Large Language Models (LLMs) can engage in **strategic deception** in a crisis bargaining context, using a signaling game framework grounded in Perfect Bayesian Equilibrium theory. We test three frontier LLMs — GPT-4.1-mini, GPT-4.1-nano, and Gemini-2.5-Flash — across 900 simulated crisis bargaining interactions and introduce the **Signal-Reason-Outcome (S-R-O)** qualitative coding framework to analyze model reasoning.
 
 ---
 
@@ -27,38 +33,45 @@ bluffing_machine_repo/
 │
 ├── code/
 │   ├── simulation_engine.py     ← Main experiment runner (LLM signaling game)
-│   ├── analyze_results.py       ← Metric computation and statistical analysis
-│   ├── generate_figures.py      ← All publication-quality visualizations
-│   └── utils.py                 ← Shared utilities
+│   ├── sensitivity_analysis.py  ← Prompt sensitivity analysis (300 games)
+│   ├── sro_qualitative_analysis.py ← S-R-O coding framework
+│   ├── generate_figures.py      ← Publication-quality visualizations
+│   ├── generate_figures_v3.py   ← Final figure versions
+│   └── test_engine.py           ← Unit tests for simulation engine
 │
 ├── data/
 │   ├── raw/
-│   │   ├── main_results.csv     ← Raw game-by-game simulation output (900 games)
-│   │   ├── reputation_results.json ← Repeated game sequences (120 sequences × 10 rounds)
-│   │   └── experiment_log.txt   ← Full timestamped experiment log
-│   └── processed/
-│       ├── summary_by_model_treatment.csv  ← Aggregated metrics per cell
-│       ├── calibration_data.csv            ← Posterior belief data for calibration curves
-│       └── reputation_decay_data.csv       ← Round-by-round bluff success rates
+│   │   ├── main_results_*.csv   ← Raw game-by-game output (900 games)
+│   │   ├── main_results_*.json  ← JSON version of raw results
+│   │   ├── summary_*.csv        ← Aggregated metrics per model × treatment
+│   │   └── experiment_log_*.txt ← Full timestamped experiment logs
+│   ├── sensitivity/
+│   │   ├── sensitivity_results_*.csv  ← 300-game sensitivity analysis results
+│   │   └── sensitivity_summary_*.csv  ← Aggregated sensitivity metrics
+│   └── qualitative/
+│       ├── sro_coded_traces.csv ← S-R-O coded reasoning traces
+│       └── sro_summary.json     ← S-R-O coding summary statistics
 │
 ├── figures/
-│   ├── fig1_signaling_game_tree.png
-│   ├── fig2_bluffing_frequency.png
-│   ├── fig3_calibration_curves.png
-│   ├── fig4_reputation_decay.png
-│   ├── fig5_reasoning_heatmap.png
-│   ├── fig6_payoff_distributions.png
-│   └── fig7_latency_tokens_dashboard.png
+│   ├── fig2_bluffing_lollipop.png     ← Bluffing rates by model & treatment
+│   ├── fig3_grouped_bar.png           ← Grouped bar chart of key metrics
+│   ├── fig4_reasoning_heatmap.png     ← S-R-O reasoning category heatmap
+│   ├── fig5_payoff_distributions.png  ← Payoff distributions
+│   ├── fig6_summary_dashboard.png     ← Summary dashboard
+│   ├── fig7_sensitivity_analysis.png  ← Prompt sensitivity results
+│   └── fig8_sro_qualitative_analysis.png ← S-R-O qualitative analysis
 │
 ├── paper/
-│   ├── bluffing_machine.tex     ← Full LaTeX source
-│   ├── references.bib           ← Bibliography
-│   └── bluffing_machine.pdf     ← Compiled manuscript
+│   ├── main.tex                 ← Full LaTeX source (unblinded)
+│   ├── main_blinded.tex         ← Blinded LaTeX source (for review)
+│   ├── references.bib           ← Bibliography (34 references)
+│   ├── main.pdf                 ← Compiled manuscript (unblinded)
+│   └── main_blinded.pdf         ← Compiled manuscript (blinded)
 │
 └── docs/
     ├── codebook.md              ← Variable definitions and data dictionary
-    ├── experimental_design.md   ← Detailed methodology documentation
-    └── CHANGELOG.md             ← Version history
+    ├── benchmark_comparison.md  ← PBE benchmark derivations
+    └── figure_audit_final.md    ← Figure QA and audit notes
 ```
 
 ---
@@ -71,8 +84,9 @@ bluffing_machine_repo/
 # Python 3.11+
 pip install -r requirements.txt
 
-# Set your OpenAI API key
-export OPENAI_API_KEY="your-key-here"
+# Set your API keys
+export OPENAI_API_KEY="your-openai-key-here"
+export GEMINI_API_KEY="your-gemini-key-here"
 ```
 
 ### Run Everything with One Command
@@ -83,9 +97,9 @@ bash run_all.sh
 
 This will:
 1. Run all LLM signaling game simulations (900 games across 3 models × 2 treatments)
-2. Run the reputation decay experiment (120 sequences × 10 rounds)
-3. Compute all metrics and generate processed datasets
-4. Generate all 7 publication-quality figures
+2. Run the prompt sensitivity analysis (300 games across 3 framing conditions)
+3. Run the S-R-O qualitative coding analysis
+4. Generate all 8 publication-quality figures
 5. Compile the LaTeX paper to PDF
 
 **Estimated runtime:** 3–5 hours (API rate limits are the bottleneck)
@@ -93,21 +107,24 @@ This will:
 ### Run Individual Components
 
 ```bash
-# Run simulations only
+# Run main simulations only
 python3 code/simulation_engine.py
 
-# Analyze existing results
-python3 code/analyze_results.py --input data/raw/main_results.csv
+# Run sensitivity analysis
+python3 code/sensitivity_analysis.py
 
-# Generate figures only
-python3 code/generate_figures.py --input data/processed/
+# Run S-R-O qualitative analysis
+python3 code/sro_qualitative_analysis.py
+
+# Generate all figures
+python3 code/generate_figures_v3.py
 ```
 
 ---
 
 ## Data Description
 
-### `data/raw/main_results.csv`
+### `data/raw/main_results_*.csv`
 
 Each row is one game in the signaling game experiment. **900 rows total** (3 models × 2 treatments × 150 simulations).
 
@@ -129,51 +146,33 @@ Each row is one game in the signaling game experiment. **900 rows total** (3 mod
 | `bluff_success` | bool | True if bluff caused Receiver to BACK_DOWN |
 | `sender_reasoning` | str | Full chain-of-thought reasoning trace (Sender) |
 | `receiver_reasoning` | str | Full chain-of-thought reasoning trace (Receiver) |
-| `sender_confidence` | float | Sender's self-reported confidence ∈ [0,1] |
-| `receiver_confidence` | float | Receiver's self-reported confidence ∈ [0,1] |
-| `sender_latency_ms` | int | API response time for Sender (milliseconds) |
-| `receiver_latency_ms` | int | API response time for Receiver (milliseconds) |
-| `sender_tokens` | int | Total tokens used by Sender call |
-| `receiver_tokens` | int | Total tokens used by Receiver call |
-| `game_duration_ms` | int | Total wall-clock time for game (milliseconds) |
 | `timestamp` | str | ISO 8601 timestamp of game execution |
 
-### `data/raw/reputation_results.json`
+### `data/sensitivity/sensitivity_results_*.csv`
 
-JSON array of repeated game sequences. Each sequence has:
-- `model_key`, `model_name`, `seq_id`
-- `rounds`: array of 11 rounds (round 0 = forced failed bluff; rounds 1–10 = free play)
+Results from the 300-game prompt sensitivity analysis across three framing conditions: `neutral`, `diplomatic`, and `military`.
 
-### `data/processed/summary_by_model_treatment.csv`
+### `data/qualitative/sro_coded_traces.csv`
 
-Aggregated metrics per model × treatment cell:
-
-| Variable | Description |
-|---|---|
-| `bluff_rate` | Proportion of LOW Resolve senders sending ESCALATE |
-| `bluff_success_rate` | Proportion of bluffs that caused BACK_DOWN |
-| `brier_score` | Brier score of Receiver posterior beliefs (lower = better calibrated) |
-| `edi` | Equilibrium Deviation Index (mean \|posterior − rational_posterior\|) |
-| `avg_sender_payoff` | Mean sender payoff across all games |
-| `avg_receiver_payoff` | Mean receiver payoff across all games |
-| `avg_latency_ms` | Mean game duration in milliseconds |
-| `total_tokens` | Total API tokens consumed in cell |
-| `cell_duration_s` | Wall-clock time to complete cell (seconds) |
+S-R-O coded reasoning traces. The **Signal-Reason-Outcome (S-R-O)** framework codes each model reasoning trace along three dimensions:
+- **Signal**: What signal did the model choose and why?
+- **Reason**: What justification category did the model invoke? (capability, risk avoidance, strategic deception, norm compliance, other)
+- **Outcome**: How did the model evaluate the expected outcome?
 
 ---
 
 ## Key Results Summary
 
-| Model | Treatment | Bluff Rate | PBE Benchmark | Brier Score | EDI |
-|---|---|---|---|---|---|
-| GPT-4.1-mini | Zero-Shot | *see paper* | 0.42 | *see paper* | *see paper* |
-| GPT-4.1-mini | Role-Conditioned | *see paper* | 0.42 | *see paper* | *see paper* |
-| GPT-4.1-nano | Zero-Shot | *see paper* | 0.42 | *see paper* | *see paper* |
-| GPT-4.1-nano | Role-Conditioned | *see paper* | 0.42 | *see paper* | *see paper* |
-| Gemini-2.5-Flash | Zero-Shot | *see paper* | 0.42 | *see paper* | *see paper* |
-| Gemini-2.5-Flash | Role-Conditioned | *see paper* | 0.42 | *see paper* | *see paper* |
+| Model | Treatment | Bluff Rate | vs. PBE (0.42) |
+|---|---|---|---|
+| GPT-4.1-mini | Zero-Shot | 0% | Far below equilibrium |
+| GPT-4.1-mini | Role-Conditioned | 100% | Far above equilibrium |
+| GPT-4.1-nano | Zero-Shot | ~0% | Far below equilibrium |
+| GPT-4.1-nano | Role-Conditioned | ~50% | Near equilibrium (different mechanism) |
+| Gemini-2.5-Flash | Zero-Shot | ~100% | Far above equilibrium |
+| Gemini-2.5-Flash | Role-Conditioned | ~100% | Far above equilibrium |
 
-*Full results in `data/processed/summary_by_model_treatment.csv` and in the paper.*
+*Full results with statistical details in `data/raw/` and in the paper.*
 
 ---
 
@@ -185,7 +184,6 @@ The Perfect Bayesian Equilibrium (PBE) predictions used as benchmarks in the pap
 - **Separating equilibrium bluff rate**: 0.00
 - **Rational Brier score** (perfect calibration): 0.00
 - **Naive baseline Brier score** (always predict 0.5): 0.25
-- **Rational reputation decay**: exponential, ~31 pp decline over 10 rounds
 
 ---
 
@@ -194,13 +192,14 @@ The Perfect Bayesian Equilibrium (PBE) predictions used as benchmarks in the pap
 If you use this code or data, please cite:
 
 ```bibtex
-@article{Tanku2026bluffing,
-  title   = {The Bluffing Machine: Generative AI, Strategic Deception,
-             and the Limits of Deterrence Theory},
+@unpublished{Tanku2026bluffing,
+  title   = {The Bluffing Machine: Large Language Models as Strategic
+             Deceivers in Crisis Bargaining},
   author  = {Tanku, Tapang Ivo},
-  journal = {Working Paper, University at Buffalo},
   year    = {2026},
-  url     = {https://github.com/TapangIvoTanku/bluffing-machine}
+  note    = {Preprint. Under review at the Journal of Global Security Studies.
+             SSRN Abstract ID: 6361838},
+  url     = {https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6361838}
 }
 ```
 
@@ -208,12 +207,12 @@ If you use this code or data, please cite:
 
 ## License
 
-- **Code:** MIT License — free to use, modify, and distribute with attribution
-- **Data:** CC BY 4.0 — free to use with attribution
+- **Code:** [MIT License](LICENSE) — free to use, modify, and distribute with attribution
+- **Data:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — free to use with attribution
 - **Paper:** All rights reserved pending journal publication
 
 ---
 
 ## Acknowledgements
 
-The author thanks the University at Buffalo Department of Political Science for institutional support. Computational experiments were conducted using the OpenAI API.
+The author thanks the University at Buffalo Department of Political Science for institutional support. Computational experiments were conducted using the OpenAI API and Google Gemini API.
